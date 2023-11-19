@@ -54,12 +54,15 @@
 		<div class="three-container" ref="threeContainer"></div>
 	</template>
 	<script lang="ts" setup>
+	import { Jotree } from "jotree"
 	import { onMounted, ref } from "vue";
-	import { PotreeHelper } from "./potreeHelper/index"
 
-	const threeContainer = ref();
+	const threeContainer = ref()
 	onMounted(() => {
-		const potreeHelper = new PotreeHelper(threeContainer.value);
+		const jotree = new Jotree(threeContainer.value);
+		jotree.loadPointCloud("data/pointclouds/room/metadata.json", "room", () => {
+			
+		})
 	})
 	</script>
 
@@ -69,26 +72,5 @@
 		height: 100%;
 	}
 	</style>
-	```
-
-	```js
-	// potreeHelper.ts
-	import * as Potree from "potree-and-type"
-
-	export class PotreeHelper {
-		constructor(threeContainer: HTMLDivElement) {
-			const viewer = new Potree.Viewer(threeContainer);
-			viewer.setEDLEnabled(true);
-			viewer.setFOV(60);
-			viewer.setPointBudget(1_000_000);
-			Potree.loadPointCloud("datas/pointclouds/room/metadata.json", "room", (e: any) => {
-				viewer.scene.addPointCloud(e.pointcloud);
-				let material = e.pointcloud.material;
-				material.size = 1;
-				material.pointSizeType = Potree.PointSizeType.ADAPTIVE;
-				viewer.fitToScreen();
-			})
-		}
-	}
 	```
 

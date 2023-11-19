@@ -1,6 +1,6 @@
 {
   "name": "jotree",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "封装potree开发中常用的一些API",
   "main": "lib/main.umd.js",
   "module": "lib/main.esm.js",
